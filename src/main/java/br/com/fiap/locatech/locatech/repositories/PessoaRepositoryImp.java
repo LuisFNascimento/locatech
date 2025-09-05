@@ -38,27 +38,23 @@ public List<Pessoa> findAll(int size, int offset) {
 @Override
 public Integer save(Pessoa pessoa) {
         return this.jdbcClient
-                .sql("INSERT INTO pessoa (marca, modelo, placa, ano, cor, valor_diaria) VALUES (:marca, :modelo, :placa, :ano, :cor, :valor_diaria)")
-                .param("marca", pessoa.getMarca())
-                .param("modelo", pessoa.getModelo())
-                .param("placa", pessoa.getPlaca())
-                .param("ano", pessoa.getAno())
-                .param("cor", pessoa.getCor())
-                .param("valor_diaria", pessoa.getValorDiaria())
+                .sql("INSERT INTO pessoas (nome, cpf, telefone, email) VALUES (:nome, :cpf, :telefone, :email)")
+                .param("nome", pessoa.getNome())
+                .param("cpf", pessoa.getCpf())
+                .param("telefone", pessoa.getTelefone())
+                .param("email", pessoa.getEmail())
                 .update();
     }
 
 @Override
 public Integer update(Pessoa pessoa, Long id) {
         return this.jdbcClient
-                .sql("UPDATE pessoa SET marca = :marca, modelo = :modelo, ano = :ano, cor = :cor, valor_diaria = :valor_diaria WHERE id = :id")
+                .sql("UPDATE pessoas SET nome = :nome, cpf = :cpf, telefone = :telefone, email = :email WHERE id = :id")
                 .param("id", id)
-                .param("marca", pessoa.getMarca())
-                .param("modelo", pessoa.getModelo())
-                .param("placa", pessoa.getPlaca())
-                .param("ano", pessoa.getAno())
-                .param("cor", pessoa.getCor())
-                .param("valor_diaria", pessoa.getValorDiaria())
+                .param("nome", pessoa.getNome())
+                .param("cpf", pessoa.getCpf())
+                .param("telefone", pessoa.getTelefone())
+                .param("email", pessoa.getEmail())
                 .update();
     }
     @Override
