@@ -28,7 +28,7 @@ public Optional<Pessoa> findById(Long id) {
 @Override
 public List<Pessoa> findAll(int size, int offset) {
         return this.jdbcClient
-                .sql("SELECT * FROM pessoa LIMIT :size OFFSET :offset")
+                .sql("SELECT * FROM pessoas LIMIT :size OFFSET :offset")
                 .param("size", size)
                 .param("offset", offset)
                 .query(Pessoa.class)
@@ -60,7 +60,7 @@ public Integer update(Pessoa pessoa, Long id) {
     @Override
     public Integer delete(Long id) {
         return this.jdbcClient
-                .sql("DELETE FROM pessoa WHERE id = :id")
+                .sql("DELETE FROM pessoas WHERE id = :id")
                 .param("id", id)
                 .update();
     }
