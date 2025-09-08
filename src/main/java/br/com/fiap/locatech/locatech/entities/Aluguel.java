@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @ToString
 public class Aluguel {
     private Long id;
-    private Long pessoaId;
-    private Long veiculoId;
+    private Long pessoaId; //pessoa_id
+    private Long veiculoId;//veiculo_id
     private String veiculoModelo;
     private String pessoaCfp;
     private String pessoaNome;
