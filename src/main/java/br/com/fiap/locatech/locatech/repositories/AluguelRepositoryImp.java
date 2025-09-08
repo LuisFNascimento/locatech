@@ -19,9 +19,15 @@ public class AluguelRepositoryImp implements AluguelRepository{
     @Override
     public Optional<Aluguel> findById(Long id) {
         return this.jdbcClient
-                .sql("SELECT a.id, a.pessoa_id, a.veiculo_id, a.data_fim, a.valor_total " +
-                        "p.nome AS pessoa_nome, p.cpf AS pessoa_cpf, " +
-                        "v.modelo AS veiculo_modelo, v.placa AS veiculo_placa " +
+                .sql("SELECT a.id,  " +
+                        "a.pessoa_id AS pessoaId, " +
+                        "a.veiculo_id AS veiculoId, " +
+                        "a.data_inicio AS dataInicio, " +
+                        "a.data_fim AS dataFim, " +
+                        "a.valor_total AS valorTotal, " +
+                        "p.nome AS pessoaNome, " +
+                        "p.cpf AS pessoaCpf, " +
+                        "v.modelo AS veiculoModelo " +
                         "FROM alugueis a " +
                         "INNER JOIN pessoas p ON a.pessoa_id = p.id " +
                         "INNER JOIN veiculos v ON a.veiculo_id = v.id " +
@@ -34,9 +40,15 @@ public class AluguelRepositoryImp implements AluguelRepository{
     @Override
     public List<Aluguel> findAll(int size, int offset) {
         return this.jdbcClient
-                .sql("SELECT a.id, a.pessoa_id, a.veiculo_id, a.data_fim, a.valor_total " +
-                        "p.nome AS pessoa_nome, p.cpf AS pessoa_cpf, " +
-                        "v.modelo AS veiculo_modelo, v.placa AS veiculo_placa " +
+                .sql("SELECT a.id, " +
+                        "a.pessoa_id AS pessoaId, " +
+                        "a.veiculo_id AS veiculoId, " +
+                        "a.data_inicio AS dataInicio, " +
+                        "a.data_fim AS dataFim, " +
+                        "a.valor_total AS valorTotal, " +
+                        "p.nome AS pessoaNome, " +
+                        "p.cpf AS pessoaCpf, " +
+                        "v.modelo AS veiculoModelo " +
                         "FROM alugueis a " +
                         "INNER JOIN pessoas p ON a.pessoa_id = p.id " +
                         "INNER JOIN veiculos v ON a.veiculo_id = v.id " +
@@ -51,7 +63,7 @@ public class AluguelRepositoryImp implements AluguelRepository{
     public Integer save(Aluguel aluguel) {
         return this.jdbcClient
                 .sql("INSERT INTO alugueis (pessoa_id, veiculo_id, data_inicio, data_fim, valor_total) VALUES " +
-                        "(:pessoa_id, :veiculo_id, :data_inicio, :data_fim, :valor_total")
+                        "(:pessoa_id, :veiculo_id, :data_inicio, :data_fim, :valor_total)")
                 .param("pessoa_id", aluguel.getPessoaId())
                 .param("veiculo_id", aluguel.getVeiculoId())
                 .param("data_inicio", aluguel.getDataInicio())
@@ -66,7 +78,7 @@ public class AluguelRepositoryImp implements AluguelRepository{
                 .sql("UPDATE alugueis SET pessoa_id = :pessoa_id, veiculo_id = :veiculo_id, data_inicio = :data_inicio," +
                         " data_fim = :data_fim, valor_total = :valor_total  WHERE id = :id")
                 .param("id", id)
-                .param("pessoa_id", aluguel.getPessoaNome())
+                .param("pessoa_id", aluguel.getPessoaId())
                 .param("veiculo_id", aluguel.getVeiculoId())
                 .param("data_inicio", aluguel.getDataInicio())
                 .param("data_fim", aluguel.getDataFim())

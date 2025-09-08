@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/alugueis")
+@RequestMapping("/pessoas")
 public class PessoaController {
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(PessoaController.class);
@@ -55,7 +55,7 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateVeiculo(
+    public ResponseEntity<Void> updatePessoa(
             @PathVariable("id") Long id,
             @RequestBody Pessoa pessoa
     ){
@@ -66,7 +66,7 @@ public class PessoaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVeiculo(
+    public ResponseEntity<Void> deletePessoa(
             @PathVariable("id") Long id
     ){
         logger.info("DELETE → /pessoas/"+ id);
